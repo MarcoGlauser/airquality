@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "airquality"
+version = "0.1.0"
+description = ""
+authors = ["Marco Glauser"]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+pillow = "^7.1.1"
+ltr559 = "^0.1.0"
+"RPi.GPIO" = "^0.7.0"
+influxdb = "^5.3.0"
+smbus = "^1.1.post2"
+python-dotenv = "^0.14.0"
+pyserial = "^3.4"
+enviroplus = "^0.0.3"
+"RPi.bme280" = "^0.2.3"
+plantower = "^0.0.11"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
