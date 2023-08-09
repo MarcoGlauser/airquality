@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 from datetime import datetime
@@ -45,7 +46,7 @@ def loop():
                 try:
                     mqtt_client.publish(
                         f"{os.getenv('MQTT_TOPIC_PREFIX', 'homeassistant')}/{type(sensor).__name__}",
-                        payload=sensor.read_data(),
+                        payload=json.dumps(sensor.read_data()),
                         retain=True,
                     )
                     print(f"[{datetime.utcnow()}] - reading {type(sensor).__name__}")

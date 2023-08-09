@@ -1,5 +1,8 @@
 FROM python:3.10 as builder
 WORKDIR /app/
+
+ENV CARGO_NET_GIT_FETCH_WITH_CLI=true
+
 RUN apt-get update && \
     apt-get install -y libtiff5-dev libjpeg62-turbo-dev libopenjp2-7-dev zlib1g-dev \
     libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python3-tk \
