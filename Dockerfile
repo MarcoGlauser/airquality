@@ -14,6 +14,7 @@ RUN apt-get update && \
 RUN --mount=type=tmpfs,target=/root/.cargo pip install poetry
 COPY pyproject.toml poetry.lock /app/
 RUN poetry export -f requirements.txt --without-hashes > requirements.txt && \
+    sed -i '/^pimoroni-bme280/d' requirements.txt && \
     pip wheel --wheel-dir=/root/wheels -r requirements.txt
 
 
@@ -25,10 +26,9 @@ WORKDIR /app/
 COPY --from=builder /app/requirements.txt /app/requirements.txt
 COPY --from=builder /root/wheels /root/wheels
 
-RUN pip install \
+RUN cat requirements.txt | xargs -n 1 pip install \
       --no-index \
-      --find-links=/root/wheels \
-      -r requirements.txt
+      --find-links=/root/wheels
 
 COPY . /app/
 
