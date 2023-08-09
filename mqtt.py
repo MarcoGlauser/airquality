@@ -30,7 +30,7 @@ def setup_mqtt() -> mqtt.Client:
     mqtt_client.on_publish = on_publish
 
     mqtt_client.connect(
-        os.getenv("MQTT_BROKER", "mosquitto"), port=os.getenv("MQTT_PORT", "1883")
+        os.getenv("MQTT_BROKER", "mosquitto"), port=int(os.getenv("MQTT_PORT", "1883"))
     )
 
     return mqtt_client
