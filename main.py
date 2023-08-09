@@ -60,6 +60,8 @@ def loop():
             print("")
     except KeyboardInterrupt:
         sys.exit(0)
+    finally:
+        mqtt_client.loop_stop()
 
 
 if __name__ == "__main__":
