@@ -11,7 +11,7 @@ RUN apt-get update && \
     build-essential libssl-dev libffi-dev libudev-dev \
     python3-dev cargo pkg-config
 
-RUN pip install poetry
+RUN curl -sSL https://install.python-poetry.org | python -
 COPY pyproject.toml poetry.lock /app/
 RUN poetry export -f requirements.txt --without-hashes > requirements.txt && \
     pip wheel --wheel-dir=/root/wheels -r requirements.txt
