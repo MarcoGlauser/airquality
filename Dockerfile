@@ -3,7 +3,9 @@ WORKDIR /app/
 RUN apt-get update && \
     apt-get install -y libtiff5-dev libjpeg62-turbo-dev libopenjp2-7-dev zlib1g-dev \
     libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python3-tk \
-    libharfbuzz-dev libfribidi-dev libxcb1-dev
+    libharfbuzz-dev libfribidi-dev libxcb1-dev \
+    build-essential libssl-dev libffi-dev \
+    python3-dev cargo pkg-config
 
 RUN pip install poetry
 COPY pyproject.toml poetry.lock /app/
