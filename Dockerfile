@@ -25,9 +25,15 @@ WORKDIR /app/
 COPY --from=builder /app/requirements.txt /app/requirements.txt
 COPY --from=builder /root/wheels /root/wheels
 
-RUN cat requirements.txt | xargs -n 1 pip install \
+RUN pip install \
       --no-index \
-      --find-links=/root/wheels
+      --find-links=/root/wheels \
+      -r requirements.txt
+
+RUN pip install \
+      --no-index \
+      --find-links=/root/wheels \
+      rpi-bme280 -I
 
 COPY . /app/
 
