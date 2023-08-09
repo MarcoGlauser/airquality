@@ -6,29 +6,16 @@ from datetime import datetime
 from serial import SerialException
 
 from backoff import Backoff
-from database_service import (
-    BME280Helper,
-    LTR559Helper,
-    connect_to_database,
-    S8Helper,
-    MICS6814Helper,
-    PMS7003Helper,
-)
 from mqtt import setup_mqtt
-from sensors.bme280 import BME280
+from sensors.bme280_sensor import BME280
 from sensors.ltr559 import LTR559
-from sensors.mics6814 import MICS6814
 from sensors.pms7003 import PMS7003
 from sensors.s8 import S8
-
-import paho.mqtt.client as mqtt
-import paho.mqtt.publish as publish
 
 sensors = [
     BME280(),
     LTR559(),
     S8(),
-    # (MICS6814(), MICS6814Helper),
     PMS7003(),
 ]
 
