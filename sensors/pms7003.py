@@ -11,18 +11,18 @@ class PMS7003(Sensor):
 
     def read_data(self):
         data = self.sensor.read()
-        print({"pm1_0": data.pm10_std, "pm2_5": data.pm25_std, "pm10": data.pm100_std})
-        return {"pm1_0": data.pm10_std, "pm2_5": data.pm25_std, "pm10": data.pm100_std}
+        print({"pm1": data.pm10_std, "pm25": data.pm25_std, "pm10": data.pm100_std})
+        return {"pm1": data.pm10_std, "pm25": data.pm25_std, "pm10": data.pm100_std}
 
     def home_assistant_auto_discovery(self) -> [str, dict]:
         return [
             (
-                f"{self.home_assistant_prefix()}pm1_0/config",
-                self._home_assistant_discovery_helper("pm1_0", "ug/m3"),
+                f"{self.home_assistant_prefix()}pm1/config",
+                self._home_assistant_discovery_helper("pm1", "ug/m3"),
             ),
             (
-                f"{self.home_assistant_prefix()}pm2_5/config",
-                self._home_assistant_discovery_helper("pm2_5", "ug/m3"),
+                f"{self.home_assistant_prefix()}pm25/config",
+                self._home_assistant_discovery_helper("pm25", "ug/m3"),
             ),
             (
                 f"{self.home_assistant_prefix()}pm10/config",

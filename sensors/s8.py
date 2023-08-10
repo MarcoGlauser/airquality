@@ -13,12 +13,12 @@ class S8(Sensor):
         while not output:
             output = ser.read(7)
         result = output[3] * 256 + output[4]
-        return {"co2": result}
+        return {"carbon_dioxide": result}
 
     def home_assistant_auto_discovery(self) -> [str, dict]:
         return [
             (
-                f"{self.home_assistant_prefix()}co2/config",
-                self._home_assistant_discovery_helper("co2", "ppm"),
+                f"{self.home_assistant_prefix()}carbon_dioxide/config",
+                self._home_assistant_discovery_helper("carbon_dioxide", "ppm"),
             )
         ]
