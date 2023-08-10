@@ -11,15 +11,15 @@ class MICS6814(Sensor):
     def home_assistant_auto_discovery(self) -> [str, dict]:
         return [
             (
-                f"{self._home_assistant_prefix}oxidising/config",
+                f"{self.home_assistant_prefix()}oxidising/config",
                 self._home_assistant_discovery_helper("oxidising", "kOhm"),
             ),
             (
-                f"{self._home_assistant_prefix}reducing/config",
+                f"{self.home_assistant_prefix()}reducing/config",
                 self._home_assistant_discovery_helper("reducing", "kOhm"),
             ),
             (
-                f"{self._home_assistant_prefix}nh3/config",
+                f"{self.home_assistant_prefix()}nh3/config",
                 self._home_assistant_discovery_helper("nh3", "kOhm"),
             ),
         ]

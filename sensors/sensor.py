@@ -2,14 +2,14 @@ import os
 
 
 class Sensor:
-    def __init__(self):
-        self._home_assistant_prefix = f"{os.getenv('MQTT_TOPIC_PREFIX', 'homeassistant')}/sensor/{type(self).__name__}"
-
     def read_data(self):
         raise NotImplementedError
 
     def home_assistant_state_topic(self) -> str:
-        return f"{self._home_assistant_prefix}/state"
+        return f"{self.home_assistant_prefix()}/state"
+
+    def home_assistant_prefix(self) -> str:
+        return f"{os.getenv('MQTT_TOPIC_PREFIX', 'homeassistant')}/sensor/{type(self).__name__}"
 
     def home_assistant_auto_discovery(self) -> [str, dict]:
         raise NotImplementedError

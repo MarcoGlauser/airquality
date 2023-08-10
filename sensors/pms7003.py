@@ -17,15 +17,15 @@ class PMS7003(Sensor):
     def home_assistant_auto_discovery(self) -> [str, dict]:
         return [
             (
-                f"{self._home_assistant_prefix}pm1_0/config",
+                f"{self.home_assistant_prefix()}pm1_0/config",
                 self._home_assistant_discovery_helper("pm1_0", "ug/m3"),
             ),
             (
-                f"{self._home_assistant_prefix}pm2_5/config",
+                f"{self.home_assistant_prefix()}pm2_5/config",
                 self._home_assistant_discovery_helper("pm2_5", "ug/m3"),
             ),
             (
-                f"{self._home_assistant_prefix}pm10/config",
+                f"{self.home_assistant_prefix()}pm10/config",
                 self._home_assistant_discovery_helper("pm10", "ug/m3"),
             ),
         ]

@@ -14,7 +14,7 @@ class LTR559(Sensor):
     def home_assistant_auto_discovery(self) -> [str, dict]:
         return [
             (
-                f"{self._home_assistant_prefix}illuminance/config",
+                f"{self.home_assistant_prefix()}illuminance/config",
                 self._home_assistant_discovery_helper("illuminance", "lux"),
             )
         ]
