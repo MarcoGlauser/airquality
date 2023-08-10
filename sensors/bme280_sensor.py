@@ -29,3 +29,19 @@ class BME280(Sensor):
             "pressure": data.pressure,
             "humidity": data.humidity,
         }
+
+    def home_assistant_auto_discovery(self) -> [str, dict]:
+        return [
+            (
+                f"{self._home_assistant_prefix}temperature/config",
+                self._home_assistant_discovery_helper("temperature", "°C"),
+            ),
+            (
+                f"{self._home_assistant_prefix}humidity/config",
+                self._home_assistant_discovery_helper("humidity", "%"),
+            ),
+            (
+                f"{self._home_assistant_prefix}pressure/config",
+                self._home_assistant_discovery_helper("pressure", "hPa"),
+            ),
+        ]

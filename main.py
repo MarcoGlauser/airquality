@@ -27,12 +27,16 @@ PMS7003().read_data()
 def loop():
     mqtt_client = setup_mqtt()
     mqtt_client.loop_start()
+    for sensor in sensors:
+        for topic, payload in sensor.home_assistant_auto_discovery():
+            mqtt_client.publish(topic, payload=json.dumps(payload), retain=True)
+
     try:
         while True:
             for sensor in sensors:
                 try:
                     mqtt_client.publish(
-                        f"{os.getenv('MQTT_TOPIC_PREFIX', 'homeassistant')}/{type(sensor).__name__}",
+                        sensor.home_assistant_state_topic(),
                         payload=json.dumps(sensor.read_data()),
                         retain=True,
                     )

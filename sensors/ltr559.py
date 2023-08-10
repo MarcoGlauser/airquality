@@ -9,6 +9,12 @@ class LTR559(Sensor):
         ltr559.get_lux()
 
     def read_data(self):
-        return {
-            'illuminance': float(ltr559.get_lux())
-        }
+        return {"illuminance": float(ltr559.get_lux())}
+
+    def home_assistant_auto_discovery(self) -> [str, dict]:
+        return [
+            (
+                f"{self._home_assistant_prefix}illuminance/config",
+                self._home_assistant_discovery_helper("illuminance", "lux"),
+            )
+        ]

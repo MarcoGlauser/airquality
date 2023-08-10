@@ -28,9 +28,8 @@ COPY --from=builder /root/wheels /root/wheels
 RUN pip install \
       --no-index \
       --find-links=/root/wheels \
-      -r requirements.txt
-
-RUN pip install \
+      -r requirements.txt && \
+    pip install \
       --no-index \
       --find-links=/root/wheels \
       rpi-bme280 -I
