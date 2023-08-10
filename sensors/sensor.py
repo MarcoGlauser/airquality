@@ -21,7 +21,7 @@ class Sensor:
             "name": sensor_type.title(),
             "state_topic": self.home_assistant_state_topic(),
             "unit_of_measurement": unit,
-            "value_template": f"{{ value_json.{sensor_type}}}",
+            "value_template": f"{{{{ value_json.{sensor_type}}}}}",
             "unique_id": identifier,
             "device": {"identifiers": [identifier], "name": type(self).__name__},
         }
