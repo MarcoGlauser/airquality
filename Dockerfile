@@ -1,4 +1,4 @@
-FROM python:3.10 as builder
+FROM python:3.13 as builder
 WORKDIR /app/
 
 ENV CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
@@ -18,13 +18,14 @@ RUN poetry export -f requirements.txt --without-hashes > requirements.txt && \
 
 
 
-FROM python:3.10-slim
+FROM python:3.13-slim
 
 WORKDIR /app/
 
 COPY --from=builder /app/requirements.txt /app/requirements.txt
 COPY --from=builder /root/wheels /root/wheels
 
+# reinstall rpi-bme280 after the initial installation to make sure that it overwrites the enviro libraries
 RUN pip install \
       --no-index \
       --find-links=/root/wheels \
