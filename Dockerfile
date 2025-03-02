@@ -4,17 +4,17 @@ WORKDIR /app/
 ENV CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
 ENV PATH="/root/.local/bin:$PATH"
 ENV POETRY_VIRTUALENVS_CREATE=false
-ENV POETRY_VERSION=1.8.5
 
 RUN apt-get update && \
     apt-get install -y gcc git libtiff5-dev libjpeg62-turbo-dev libopenjp2-7-dev zlib1g-dev \
     libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python3-tk \
     libharfbuzz-dev libfribidi-dev libxcb1-dev \
     build-essential libssl-dev libffi-dev libudev-dev libssl3 \
-    cargo pkg-config
+    cargo pkg-config pipx
 
 
-RUN curl -sSL https://install.python-poetry.org | python -
+RUN pipx install poetry && \
+    poetry self add poetry-plugin-export
 
 COPY pyproject.toml poetry.lock /app/
 RUN poetry export -f requirements.txt --without-hashes > requirements.txt && \
