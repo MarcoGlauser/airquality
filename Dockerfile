@@ -1,7 +1,8 @@
-FROM python:3.10 as builder
+FROM python:3.13 as builder
 WORKDIR /app/
 
 ENV CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
+ENV PATH="/root/.local/bin:$PATH"
 
 RUN apt-get update && \
     apt-get install -y gcc git libtiff5-dev libjpeg62-turbo-dev libopenjp2-7-dev zlib1g-dev \
@@ -11,7 +12,7 @@ RUN apt-get update && \
     cargo pkg-config
 
 
-RUN --mount=type=tmpfs,target=/root/.cargo pip install poetry && \
+RUN curl -sSL https://install.python-poetry.org | python - && \
     poetry self add poetry-plugin-export
 
 COPY pyproject.toml poetry.lock /app/
@@ -20,7 +21,7 @@ RUN poetry export -f requirements.txt --without-hashes > requirements.txt && \
 
 
 
-FROM python:3.10-slim
+FROM python:3.13-slim
 
 WORKDIR /app/
 
