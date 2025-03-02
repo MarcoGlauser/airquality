@@ -11,6 +11,7 @@ from sensors.bme280_sensor import BME280
 from sensors.ltr559 import LTR559
 from sensors.pms7003 import PMS7003
 from sensors.s8 import S8
+from sensors.sensor import SensorError
 
 sensors = [
     BME280(),
@@ -43,6 +44,11 @@ def loop():
                     print(f"[{datetime.utcnow()}] - reading {type(sensor).__name__}")
 
                 except SerialException as e:
+                    print(e)
+                    print(
+                        f"[{datetime.utcnow()}] - Failed reading {type(sensor).__name__}. SKIPPED!"
+                    )
+                except SensorError as e:
                     print(e)
                     print(
                         f"[{datetime.utcnow()}] - Failed reading {type(sensor).__name__}. SKIPPED!"

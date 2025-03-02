@@ -1,5 +1,7 @@
 import os
 
+class SensorError(Exception):
+    pass
 
 class Sensor:
     def read_data(self):
