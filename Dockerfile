@@ -1,4 +1,4 @@
-FROM python:3.13 as builder
+FROM python:3.10 as builder
 WORKDIR /app/
 
 ENV CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
@@ -8,17 +8,19 @@ RUN apt-get update && \
     libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python3-tk \
     libharfbuzz-dev libfribidi-dev libxcb1-dev \
     build-essential libssl-dev libffi-dev libudev-dev libssl3 \
-    python3-dev cargo pkg-config
+    cargo pkg-config
 
 
-RUN --mount=type=tmpfs,target=/root/.cargo pip install poetry
+RUN --mount=type=tmpfs,target=/root/.cargo pip install poetry && \
+    poetry self add poetry-plugin-export
+
 COPY pyproject.toml poetry.lock /app/
 RUN poetry export -f requirements.txt --without-hashes > requirements.txt && \
     pip wheel --wheel-dir=/root/wheels -r requirements.txt
 
 
 
-FROM python:3.13-slim
+FROM python:3.10-slim
 
 WORKDIR /app/
 
