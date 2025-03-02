@@ -159,32 +159,33 @@ files = [
 
 [[package]]
 name = "i2cdevice"
-version = "0.0.7"
-description = "Python DSL for interacting with SMBus-compatible i2c devices"
+version = "1.0.0"
+description = "Python framework for interacting with SMBus-compatible i2c devices"
 optional = false
-python-versions = "*"
+python-versions = ">=3.7"
 groups = ["main"]
 files = [
-    {file = "i2cdevice-0.0.7-py2-none-any.whl", hash = "sha256:247e536e6a5398d87db8f9a3a0c0c11f0f12f84ec58f4e43b0cd325a19ec23bc"},
-    {file = "i2cdevice-0.0.7-py3-none-any.whl", hash = "sha256:a80e59e280a7992691f9e30705f24bc650c9e694ba781277d47bef02d2b0276c"},
-    {file = "i2cdevice-0.0.7.tar.gz", hash = "sha256:fb6dafcbf654a9de732adb51c99a0aded31cfa924ea0b78b1583944c00a9235c"},
-]
-
-[[package]]
-name = "ltr559"
-version = "0.1.1"
-description = "Python library for the LTR559 light and proximity"
-optional = false
-python-versions = ">= 2.7"
-groups = ["main"]
-files = [
-    {file = "ltr559-0.1.1-py2-none-any.whl", hash = "sha256:1339b92f315d6afcb6a66c2c80ef669cc159c6b8e0f93e53e15d19e75e33640e"},
-    {file = "ltr559-0.1.1-py3-none-any.whl", hash = "sha256:671e08e9ae1cd8063dfb8f0fc2ea47a9010649af5b65c40e92a332aff99996f6"},
-    {file = "ltr559-0.1.1.tar.gz", hash = "sha256:635b66897130dc77bb8907dc4223588ddba72043df62f31454d5f0d0a2b1cafe"},
+    {file = "i2cdevice-1.0.0-py3-none-any.whl", hash = "sha256:595cfa3815aab4d8a4bbe1cbd4a4e1271d56cf7c1de367eab6a94dd80566f0c1"},
+    {file = "i2cdevice-1.0.0.tar.gz", hash = "sha256:a9a5d1666a11b6733d16c73f148fc85cba767dd1b976e5bcc56ad970986c96c4"},
 ]
 
 [package.dependencies]
-i2cdevice = ">=0.0.6"
+smbus2 = "*"
+
+[[package]]
+name = "ltr559"
+version = "1.0.0"
+description = "Python library for the LTR559 light and proximity"
+optional = false
+python-versions = ">=3.7"
+groups = ["main"]
+files = [
+    {file = "ltr559-1.0.0-py3-none-any.whl", hash = "sha256:0805f2d9ab43b2f622847ec71cb6fbca2b91b396aafb121d911172a366a56c3d"},
+    {file = "ltr559-1.0.0.tar.gz", hash = "sha256:5efe5940faeeb42ee3a7b8fca3c0b4c6ceb6005e4dca59e20a086e8fe1bdaf29"},
+]
+
+[package.dependencies]
+i2cdevice = ">=1.0.0"
 
 [[package]]
 name = "paho-mqtt"
@@ -539,4 +540,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<4.0"
-content-hash = "b1f6275bb65c541d1d7c14689d8c0e6a4b807aa00ad029e994e9c53c598f1090"
+content-hash = "654e784bf0c8197704f8e2a58aec4b291b1e07a99e25ad2fbe2c33dec70ec79c"
