@@ -15,6 +15,6 @@ class LTR559(Sensor):
         return [
             (
                 f"{self.home_assistant_prefix()}illuminance/config",
-                self._home_assistant_discovery_helper("illuminance", "lux"),
+                self._home_assistant_discovery_helper("illuminance", "lx"),
             )
         ]

@@ -18,14 +18,14 @@ class PMS7003(Sensor):
         return [
             (
                 f"{self.home_assistant_prefix()}pm1/config",
-                self._home_assistant_discovery_helper("pm1", "ug/m3"),
+                self._home_assistant_discovery_helper("pm1", "µg/m³"),
             ),
             (
                 f"{self.home_assistant_prefix()}pm25/config",
-                self._home_assistant_discovery_helper("pm25", "ug/m3"),
+                self._home_assistant_discovery_helper("pm25", "µg/m³"),
             ),
             (
                 f"{self.home_assistant_prefix()}pm10/config",
-                self._home_assistant_discovery_helper("pm10", "ug/m3"),
+                self._home_assistant_discovery_helper("pm10", "µg/m³"),
             ),
         ]
