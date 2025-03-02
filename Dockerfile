@@ -14,8 +14,7 @@ RUN apt-get update && \
 
 
 RUN pip install --user pipx && \
-    pipx install poetry && \
-    poetry self add poetry-plugin-export
+    pipx install poetry==1.8.4
 
 COPY pyproject.toml poetry.lock /app/
 RUN poetry export -f requirements.txt --without-hashes > requirements.txt && \
