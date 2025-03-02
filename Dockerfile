@@ -3,6 +3,8 @@ WORKDIR /app/
 
 ENV CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
 ENV PATH="/root/.local/bin:$PATH"
+ENV POETRY_VIRTUALENVS_CREATE=false
+ENV POETRY_VERSION=2.1.1
 
 RUN apt-get update && \
     apt-get install -y gcc git libtiff5-dev libjpeg62-turbo-dev libopenjp2-7-dev zlib1g-dev \
