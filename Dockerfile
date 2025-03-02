@@ -10,10 +10,11 @@ RUN apt-get update && \
     libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python3-tk \
     libharfbuzz-dev libfribidi-dev libxcb1-dev \
     build-essential libssl-dev libffi-dev libudev-dev libssl3 \
-    cargo pkg-config pipx
+    cargo pkg-config
 
 
-RUN pipx install poetry && \
+RUN pip install --user pipx && \
+    pipx install poetry && \
     poetry self add poetry-plugin-export
 
 COPY pyproject.toml poetry.lock /app/
