@@ -2,7 +2,7 @@ import time
 
 
 class Backoff:
-    def __init__(self, initial_backoff=30, max_backoff=300, backoff_increment=30, counter_size=8):
+    def __init__(self, initial_backoff=10, max_backoff=60, backoff_increment=10, counter_size=8):
         self.current_backoff = initial_backoff
         self.max_backoff = max_backoff
         self.backoff_increment = backoff_increment
@@ -19,4 +19,4 @@ class Backoff:
             self.current_backoff = min(self.current_backoff + self.backoff_increment, self.max_backoff)
 
     def _sleep(self):
-        time.sleep(5)
+        time.sleep(self.current_backoff)
