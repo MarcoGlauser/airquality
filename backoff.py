@@ -1,22 +1,30 @@
 import time
+from dataclasses import dataclass
 
 
+@dataclass
 class Backoff:
-    def __init__(self, initial_backoff=10, max_backoff=60, backoff_increment=10, counter_size=8):
-        self.current_backoff = initial_backoff
-        self.max_backoff = max_backoff
-        self.backoff_increment = backoff_increment
-        self.counter_size = counter_size
-        self.counter = self.counter_size
+
+    initial_backoff: int = 10
+    backoff_increment: int = 10
+    max_backoff: int = 60
+    counter_size = 8
+
+    _current_backoff: int = 0
+    _counter: int = 0
+
+    def __post_init__(self):
+        self._counter = self.counter_size
+        self._current_backoff = self.initial_backoff
 
     def backoff(self):
-        if self.counter > 1:
-            self.counter -= 1
+        if self._counter > 1:
+            self._counter -= 1
             self._sleep()
         else:
             self._sleep()
-            self.counter = self.counter_size
-            self.current_backoff = min(self.current_backoff + self.backoff_increment, self.max_backoff)
+            self._counter = self.counter_size
+            self._current_backoff = min(self._current_backoff + self.backoff_increment, self.max_backoff)
 
     def _sleep(self):
-        time.sleep(self.current_backoff)
+        time.sleep(self._current_backoff)

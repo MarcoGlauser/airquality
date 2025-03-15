@@ -1,7 +1,7 @@
 import json
 import os
 import sys
-from datetime import datetime
+from datetime import datetime, UTC
 
 from serial import SerialException
 
@@ -20,7 +20,7 @@ sensors = [
     PMS7003(),
 ]
 
-sensor_backoff = Backoff(initial_backoff=60, max_backoff=180, backoff_increment=60)
+sensor_backoff = Backoff()
 LTR559().read_data()
 PMS7003().read_data()
 
@@ -41,17 +41,17 @@ def loop():
                         payload=json.dumps(sensor.read_data()),
                         retain=True,
                     )
-                    print(f"[{datetime.utcnow()}] - reading {type(sensor).__name__}")
+                    print(f"[{datetime.now(UTC)}] - reading {type(sensor).__name__}")
 
                 except SerialException as e:
                     print(e)
                     print(
-                        f"[{datetime.utcnow()}] - Failed reading {type(sensor).__name__}. SKIPPED!"
+                        f"[{datetime.now(UTC)}] - Failed reading {type(sensor).__name__}. SKIPPED!"
                     )
                 except SensorError as e:
                     print(e)
                     print(
-                        f"[{datetime.utcnow()}] - Failed reading {type(sensor).__name__}. SKIPPED!"
+                        f"[{datetime.now(UTC)}] - Failed reading {type(sensor).__name__}. SKIPPED!"
                     )
             print("backoff")
             sensor_backoff.backoff()
