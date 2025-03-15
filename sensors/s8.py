@@ -16,6 +16,7 @@ class ModbusResponse:
     byte_count: int
     data: bytes
     crc: bytes
+    message_without_crc: bytes
 
     def __init__(self, response: bytes):
         self.address = response[0]
@@ -23,6 +24,7 @@ class ModbusResponse:
         self.byte_count = response[2]
         self.data = response[3:-2]
         self.crc = response[-2:]
+        self.message_without_crc = response[:-2]
 
         print(f"Address: {self.address}")
         print(f"Function: {self.function}")
@@ -38,7 +40,7 @@ class ModbusResponse:
 
     def generate_crc(self):
         crc = 0xFFFF
-        for byte in self.data:
+        for byte in self.message_without_crc:
             crc ^= byte
             for _ in range(8):
                 if crc & 0x0001:
@@ -54,7 +56,7 @@ class S8(Sensor):
         super().__init__()
         self.serial = serial.Serial("/dev/ttyUSB0", 9600, 8, "N", 1, timeout=1)
 
-        abc_status = self.send_command(s8_abc_status, 8)
+        abc_status = self.send_command(s8_abc_enable, 8)
         print(f"ABC Status: {abc_status.data_as_int()}")
 
     def read_response(self, size) -> ModbusResponse:
