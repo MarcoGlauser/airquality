@@ -8,7 +8,7 @@ class Backoff:
     initial_backoff: int = 10
     backoff_increment: int = 10
     max_backoff: int = 60
-    counter_size = 8
+    counter_size:int = 8
 
     _current_backoff: int = 0
     _counter: int = 0
@@ -27,4 +27,5 @@ class Backoff:
             self._current_backoff = min(self._current_backoff + self.backoff_increment, self.max_backoff)
 
     def _sleep(self):
+        print(f"Sleeping for {self._current_backoff} seconds")
         time.sleep(self._current_backoff)
