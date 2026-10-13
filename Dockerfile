@@ -1,4 +1,4 @@
-FROM python:3.13 as builder
+FROM python:3.15 as builder
 WORKDIR /app/
 
 ENV CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
@@ -22,7 +22,7 @@ RUN poetry export -f requirements.txt --without-hashes > requirements.txt && \
 
 
 
-FROM python:3.13-slim
+FROM python:3.15-slim
 
 WORKDIR /app/
 
