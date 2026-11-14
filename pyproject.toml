@@ -5,7 +5,7 @@ description = ""
 authors = [{ name = "Marco Glauser" }]
 requires-python = ">=3.13"
 dependencies = [
-    "ltr559>=0.1.0,<0.2",
+    "ltr559>=1,<1.1",
     "python-dotenv>=1.0.0,<2",
     "pyserial>=3.4,<4",
     "RPi.bme280>=0.2.3,<0.3",
