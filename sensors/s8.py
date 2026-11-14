@@ -98,13 +98,17 @@ class S8(Sensor):
     def read_data(self):
         if self.calibration_requested.is_set():
             self.calibration_requested.clear()
-            self.force_calibration()
+            try:
+                self.force_calibration()
+            except SensorError as e:
+                # still publish the reading below, a failed calibration shouldn't hide it
+                print(e)
         response = self.send_command(s8_co2,7)
         # the sensor reports a signed value: a drifted baseline shows up as negative ppm
         # (which used to be published as ~65000)
         co2 = int.from_bytes(response.data, "big", signed=True)
         if co2 < 0:
-            raise SensorError(f"S8 reported {co2} ppm, baseline is off - recalibrate in fresh air")
+            print(f"S8 reported {co2} ppm, baseline is off - recalibrate in fresh air")
         return {"carbon_dioxide": co2}
 
     def home_assistant_auto_discovery(self) -> [str, dict]:
