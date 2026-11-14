@@ -130,6 +130,7 @@ class S8(Sensor):
                         "identifiers": [f"{type(self).__name__}_carbon_dioxide"],
                         "name": type(self).__name__,
                     },
+                    **self.home_assistant_availability(),
                 },
             ),
         ]

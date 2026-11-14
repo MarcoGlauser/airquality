@@ -44,17 +44,18 @@ def loop():
                         payload=json.dumps(sensor.read_data()),
                         retain=True,
                     )
+                    mqtt_client.publish(
+                        sensor.home_assistant_availability_topic(), "online", retain=True
+                    )
                     print(f"[{datetime.now(UTC)}] - reading {type(sensor).__name__}")
 
-                except SerialException as e:
+                except (SerialException, SensorError) as e:
                     print(e)
                     print(
                         f"[{datetime.now(UTC)}] - Failed reading {type(sensor).__name__}. SKIPPED!"
                     )
-                except SensorError as e:
-                    print(e)
-                    print(
-                        f"[{datetime.now(UTC)}] - Failed reading {type(sensor).__name__}. SKIPPED!"
+                    mqtt_client.publish(
+                        sensor.home_assistant_availability_topic(), "offline", retain=True
                     )
             print("backoff")
             sensor_backoff.backoff()

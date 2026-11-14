@@ -2,10 +2,13 @@ import os
 
 import paho.mqtt.client as mqtt
 
+from sensors.sensor import APP_AVAILABILITY_TOPIC
+
 
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
         print("connected OK")
+        client.publish(APP_AVAILABILITY_TOPIC, "online", retain=True)
         # (re)subscribe on every connect so commands keep working after a reconnect
         for topic in userdata["command_handlers"]:
             client.subscribe(topic)
@@ -31,6 +34,8 @@ def setup_mqtt(command_handlers: dict | None = None) -> mqtt.Client:
     mqtt_client = mqtt.Client(
         client_id=device_id, userdata={"command_handlers": command_handlers}
     )
+    # broker marks the whole app offline if we drop off without saying goodbye
+    mqtt_client.will_set(APP_AVAILABILITY_TOPIC, "offline", retain=True)
     for topic, handler in command_handlers.items():
         mqtt_client.message_callback_add(topic, handler)
 
