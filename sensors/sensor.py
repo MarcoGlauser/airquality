@@ -16,6 +16,10 @@ class Sensor:
     def home_assistant_auto_discovery(self) -> [str, dict]:
         raise NotImplementedError
 
+    def command_handlers(self) -> dict:
+        """MQTT topics this sensor listens on, mapped to paho message callbacks."""
+        return {}
+
     def _home_assistant_discovery_helper(self, sensor_type: str, unit: str) -> dict:
         identifier = f"{type(self).__name__}_{sensor_type}"
         return {

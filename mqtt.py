@@ -6,6 +6,9 @@ import paho.mqtt.client as mqtt
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
         print("connected OK")
+        # (re)subscribe on every connect so commands keep working after a reconnect
+        for topic in userdata["command_handlers"]:
+            client.subscribe(topic)
     else:
         print("Bad connection Returned code=", rc)
 
@@ -21,10 +24,15 @@ def get_serial_number():
                 return line.split(":")[1].strip()
 
 
-def setup_mqtt() -> mqtt.Client:
+def setup_mqtt(command_handlers: dict | None = None) -> mqtt.Client:
+    command_handlers = command_handlers or {}
     device_serial_number = get_serial_number()
     device_id = "raspi-" + device_serial_number
-    mqtt_client = mqtt.Client(client_id=device_id)
+    mqtt_client = mqtt.Client(
+        client_id=device_id, userdata={"command_handlers": command_handlers}
+    )
+    for topic, handler in command_handlers.items():
+        mqtt_client.message_callback_add(topic, handler)
 
     mqtt_client.on_connect = on_connect
     mqtt_client.on_publish = on_publish

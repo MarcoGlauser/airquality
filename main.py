@@ -26,7 +26,10 @@ PMS7003().read_data()
 
 
 def loop():
-    mqtt_client = setup_mqtt()
+    command_handlers = {}
+    for sensor in sensors:
+        command_handlers.update(sensor.command_handlers())
+    mqtt_client = setup_mqtt(command_handlers)
     mqtt_client.loop_start()
     for sensor in sensors:
         for topic, payload in sensor.home_assistant_auto_discovery():
