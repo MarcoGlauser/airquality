@@ -37,7 +37,7 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Set up uv
-        uses: astral-sh/setup-uv@v10
+        uses: astral-sh/setup-uv@v10.3.3
 
       - name: End-to-end test with emulated sensors
         run: uv run pytest tests/e2e -v
