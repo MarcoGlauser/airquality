@@ -6,18 +6,18 @@ import paho.mqtt.client as mqtt
 from sensors.sensor import APP_AVAILABILITY_TOPIC
 
 
-def on_connect(client, userdata, flags, rc):
-    if rc == 0:
+def on_connect(client, userdata, flags, reason_code, properties):
+    if not reason_code.is_failure:
         print("connected OK")
         client.publish(APP_AVAILABILITY_TOPIC, "online", retain=True)
         # (re)subscribe on every connect so commands keep working after a reconnect
         for topic in userdata["command_handlers"]:
             client.subscribe(topic)
     else:
-        print("Bad connection Returned code=", rc)
+        print("Bad connection Returned code=", reason_code)
 
 
-def on_publish(client, userdata, mid):
+def on_publish(client, userdata, mid, reason_code, properties):
     print("mid: " + str(mid))
 
 
@@ -35,6 +35,7 @@ def setup_mqtt(command_handlers: dict | None = None) -> mqtt.Client:
     device_serial_number = get_serial_number()
     device_id = "raspi-" + device_serial_number
     mqtt_client = mqtt.Client(
+        mqtt.CallbackAPIVersion.VERSION2,
         client_id=device_id, userdata={"command_handlers": command_handlers}
     )
     # broker marks the whole app offline if we drop off without saying goodbye
