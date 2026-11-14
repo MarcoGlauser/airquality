@@ -1,0 +1,117 @@
+version = 1
+revision = 3
+requires-python = ">=3.13"
+
+[[package]]
+name = "airquality"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "ltr559" },
+    { name = "paho-mqtt" },
+    { name = "plantower" },
+    { name = "pyserial" },
+    { name = "python-dotenv" },
+    { name = "rpi-bme280" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "ltr559", specifier = ">=0.1.0,<0.2" },
+    { name = "paho-mqtt", specifier = ">=1.6.1,<2" },
+    { name = "plantower", specifier = ">=0.0.11,<0.0.12" },
+    { name = "pyserial", specifier = ">=3.4,<4" },
+    { name = "python-dotenv", specifier = ">=1.0.0,<2" },
+    { name = "rpi-bme280", specifier = ">=0.2.3,<0.3" },
+]
+
+[[package]]
+name = "i2cdevice"
+version = "1.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "smbus2" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/c3/9f/017fbfac4f1c69be128b59f432a16d5d9559794c1975c926bd549596bbfe/i2cdevice-1.0.0.tar.gz", hash = "sha256:a9a5d1666a11b6733d16c73f148fc85cba767dd1b976e5bcc56ad970986c96c4", size = 17023, upload-time = "2023-10-30T11:59:46.688Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/25/0c/38c1b44e9233378fad579ce89040d934d12c53ed8536982ad26a6a3bab7f/i2cdevice-1.0.0-py3-none-any.whl", hash = "sha256:595cfa3815aab4d8a4bbe1cbd4a4e1271d56cf7c1de367eab6a94dd80566f0c1", size = 10801, upload-time = "2023-10-30T11:59:43.562Z" },
+]
+
+[[package]]
+name = "ltr559"
+version = "0.1.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "i2cdevice" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/9f/53/ef066529b79acbb5d44f6bf4d73dbc5b0e9d1b84760ec063f4c8ee5c9910/ltr559-0.1.1.tar.gz", hash = "sha256:635b66897130dc77bb8907dc4223588ddba72043df62f31454d5f0d0a2b1cafe", size = 8841, upload-time = "2020-05-05T16:32:58.22Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/34/27/1e93c077ecf10fbafe7fda188de77105c54afba3457e70f881f2929eeec1/ltr559-0.1.1-py3-none-any.whl", hash = "sha256:671e08e9ae1cd8063dfb8f0fc2ea47a9010649af5b65c40e92a332aff99996f6", size = 8180, upload-time = "2020-05-05T16:32:57.191Z" },
+]
+
+[[package]]
+name = "paho-mqtt"
+version = "1.6.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/f8/dd/4b75dcba025f8647bc9862ac17299e0d7d12d3beadbf026d8c8d74215c12/paho-mqtt-1.6.1.tar.gz", hash = "sha256:2a8291c81623aec00372b5a85558a372c747cbca8e9934dfe218638b8eefc26f", size = 99373, upload-time = "2021-10-21T10:33:59.864Z" }
+
+[[package]]
+name = "plantower"
+version = "0.0.11"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pyserial" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/67/ce/0202df8bed6774daa0b2fd29cbdb4b55396f51a4288bfba754a7dcc6597f/plantower-0.0.11.tar.gz", hash = "sha256:44ddc59e6efa64f71c1e04d1f8b3a6bd4d5b249247a83cd0711122ac2c7ae13e", size = 4700, upload-time = "2020-02-10T14:14:15.945Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/59/f3/8c361b803d04837a0eab76fd19878515b7a18064e757a1dc46d1095f6cc7/plantower-0.0.11-py3-none-any.whl", hash = "sha256:efc86671cc24f212fb492a841828a78954409c1eda8916b1a8995d8ab69aee5c", size = 5295, upload-time = "2020-02-10T14:14:13.893Z" },
+]
+
+[[package]]
+name = "pyserial"
+version = "3.5"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/1e/7d/ae3f0a63f41e4d2f6cb66a5b57197850f919f59e558159a4dd3a818f5082/pyserial-3.5.tar.gz", hash = "sha256:3c77e014170dfffbd816e6ffc205e9842efb10be9f58ec16d3e8675b4925cddb", size = 159125, upload-time = "2020-11-23T03:59:15.045Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/07/bc/587a445451b253b285629263eb51c2d8e9bcea4fc97826266d186f96f558/pyserial-3.5-py2.py3-none-any.whl", hash = "sha256:c4451db6ba391ca6ca299fb3ec7bae67a5c55dde170964c7a14ceefec02f2cf0", size = 90585, upload-time = "2020-11-23T03:59:13.41Z" },
+]
+
+[[package]]
+name = "python-dotenv"
+version = "1.2.4"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/74/26/2fbeedb218a787a5eea551c7532cac4e009f83d689dd2faa0d0353473f86/python_dotenv-1.2.4.tar.gz", hash = "sha256:f0d53e69935a851c0dcc78f3ab7aaccd8cabef0b92382b576b824212902873c0", size = 60824, upload-time = "2026-10-01T05:36:10Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/60/d1/38f3a3405989a89ac18390803e70c6ad7c7760da4f9b83cbeca0c44a0c72/python_dotenv-1.2.4-py3-none-any.whl", hash = "sha256:42269a8a5b3fd54ffa6f3d84b18abed50064717576b4ecf03dc4a55d8aa04fdc", size = 23266, upload-time = "2026-10-01T05:36:08.633Z" },
+]
+
+[[package]]
+name = "pytz"
+version = "2026.6"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/f5/b0/168030b0bfcc334cf09fa3313afdb888d892c8a0027324683d1de0ec277e/pytz-2026.6.tar.gz", hash = "sha256:3b0fc2727707663d6e517936f444fd8a8b240f1fc32f4bf7ee03274245945284", size = 318520, upload-time = "2026-10-29T09:05:47.011Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b6/25/564f3fc5b70c1398d706c51f2b1470d0ea0b1b2f96fee67877b6f5bdf3b6/pytz-2026.6-py2.py3-none-any.whl", hash = "sha256:7fed3fee8fd6bd4a2b7b75a8d56021d0624127bf69bd5691f115db929ac570b3", size = 506321, upload-time = "2026-10-29T09:05:45.14Z" },
+]
+
+[[package]]
+name = "rpi-bme280"
+version = "0.2.4"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pytz" },
+    { name = "smbus2" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/14/27/636b1924ab8bbdf138868051e767b857bf60ad2d05e17f7b26d2fbf4cbfd/RPi.bme280-0.2.4.tar.gz", hash = "sha256:5b0e9309a2d518f9e120f1343ed4fc81ff69b196db748eabf96dd575a9f48c5d", size = 1733283, upload-time = "2021-12-22T16:47:43.712Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d9/89/42857818741cd2be752ac2cc9f602571c6150c12362a4a4c466fda0ec5eb/RPi.bme280-0.2.4-py2.py3-none-any.whl", hash = "sha256:9dee82a9c4eef23606dc04e4f582821ebafb21fb943dbf588cf38fc0b636fc39", size = 10442, upload-time = "2021-12-22T16:47:45.89Z" },
+]
+
+[[package]]
+name = "smbus2"
+version = "0.6.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/87/37/b3f7b501502c4915ba3819d1dc277bf3f5fae4a9d067caa4f502aaddd889/smbus2-0.6.1.tar.gz", hash = "sha256:2b043372abf8f6029a632c3aab36b641c5d5872b1cbad599fc68e17ac4fd90a5", size = 17274, upload-time = "2026-04-09T20:37:54.821Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/96/f2/c78a68bd739ac8fc608747cff73a4db3b19f3135658ed4e64374f6425cbf/smbus2-0.6.1-py2.py3-none-any.whl", hash = "sha256:650feeb27ca0ed58b07db4c10201c2a662c41305b7bf6e5fab9d888056f48180", size = 11767, upload-time = "2026-04-09T20:37:53.728Z" },
+]

@@ -1,43 +1,18 @@
-FROM python:3.13 as builder
-WORKDIR /app/
-
-ENV CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
-ENV PATH="/root/.local/bin:$PATH"
-ENV POETRY_VIRTUALENVS_CREATE=false
-
-RUN apt-get update && \
-    apt-get install -y gcc git libtiff5-dev libjpeg62-turbo-dev libopenjp2-7-dev zlib1g-dev \
-    libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python3-tk \
-    libharfbuzz-dev libfribidi-dev libxcb1-dev \
-    build-essential libssl-dev libffi-dev libudev-dev libssl3 \
-    cargo pkg-config
-
-
-RUN pip install --user pipx && \
-    pipx install poetry==1.8.4
-
-COPY pyproject.toml poetry.lock /app/
-RUN poetry export -f requirements.txt --without-hashes > requirements.txt && \
-    pip wheel --wheel-dir=/root/wheels -r requirements.txt
-
-
-
 FROM python:3.13-slim
 
+COPY --from=ghcr.io/astral-sh/uv:0.9.26 /uv /bin/uv
+
 WORKDIR /app/
 
-COPY --from=builder /app/requirements.txt /app/requirements.txt
-COPY --from=builder /root/wheels /root/wheels
+# use the image's python, put the venv outside /app so COPY . can't clobber it
+ENV UV_PYTHON_DOWNLOADS=0 \
+    UV_COMPILE_BYTECODE=1 \
+    UV_LINK_MODE=copy \
+    UV_PROJECT_ENVIRONMENT=/opt/venv \
+    PATH="/opt/venv/bin:$PATH"
 
-# reinstall rpi-bme280 after the initial installation to make sure that it overwrites the enviro libraries
-RUN pip install \
-      --no-index \
-      --find-links=/root/wheels \
-      -r requirements.txt && \
-    pip install \
-      --no-index \
-      --find-links=/root/wheels \
-      rpi-bme280 -I
+COPY pyproject.toml uv.lock /app/
+RUN uv sync --locked --no-dev --no-install-project
 
 COPY . /app/
 

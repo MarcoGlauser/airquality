@@ -1,24 +1,15 @@
-[tool.poetry]
+[project]
 name = "airquality"
 version = "0.1.0"
 description = ""
-authors = ["Marco Glauser"]
-
-[tool.poetry.dependencies]
-python = ">=3.10,<4.0"
-pillow = "^11.1.0"
-ltr559 = "^0.1.0"
-"RPi.GPIO" = "^0.7.0"
-smbus = "^1.1.post2"
-python-dotenv = "^1.0.0"
-pyserial = "^3.4"
-enviroplus = "^0.0.6"
-"RPi.bme280" = "^0.2.3"
-plantower = "^0.0.11"
-paho-mqtt = "^1.6.1"
-
-[tool.poetry.dev-dependencies]
-
-[build-system]
-requires = ["poetry>=2.1.0"]
-build-backend = "poetry.masonry.api"
+authors = [{ name = "Marco Glauser" }]
+requires-python = ">=3.13"
+dependencies = [
+    "ltr559>=0.1.0,<0.2",
+    "python-dotenv>=1.0.0,<2",
+    "pyserial>=3.4,<4",
+    "RPi.bme280>=0.2.3,<0.3",
+    "plantower>=0.0.11,<0.0.12",
+    # mqtt.py uses the 1.x client API
+    "paho-mqtt>=1.6.1,<2",
+]
