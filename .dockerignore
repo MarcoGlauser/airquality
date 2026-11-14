@@ -3,4 +3,5 @@ venv
 .idea
 
 .env
-.git
+.gittests
+.pytest_cache

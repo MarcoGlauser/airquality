@@ -1,4 +1,5 @@
 import os
+import socket
 
 import paho.mqtt.client as mqtt
 
@@ -25,6 +26,8 @@ def get_serial_number():
         for line in f:
             if line[0:6] == "Serial":
                 return line.split(":")[1].strip()
+    # not a Raspberry Pi (or emulated): fall back to something stable
+    return socket.gethostname()
 
 
 def setup_mqtt(command_handlers: dict | None = None) -> mqtt.Client:

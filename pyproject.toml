@@ -13,3 +13,8 @@ dependencies = [
     # mqtt.py uses the 1.x client API
     "paho-mqtt>=1.6.1,<2",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]
